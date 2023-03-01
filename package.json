@@ -1,0 +1,28 @@
+{
+  "name": "login_endpoint",
+  "version": "1.0.0",
+  "description": "endpoint for login page",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ellenan2/CS555.git"
+  },
+  "keywords": [
+    "endpoint",
+    "login"
+  ],
+  "author": "Team 17",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ellenan2/CS555/issues"
+  },
+  "homepage": "https://github.com/ellenan2/CS555#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  }
+}
