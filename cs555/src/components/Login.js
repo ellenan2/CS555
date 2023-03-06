@@ -16,6 +16,7 @@ function Login() {
 
   return (
     <div class="login-form">
+      <header>Login</header>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
@@ -35,7 +36,7 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">LOGIN</button>
       </form>
     </div>
   );

@@ -20,6 +20,7 @@ function SignUp() {
 
   return (
     <div class="signUp-form">
+      <header>Sign Up</header>
       <form onSubmit={handleSubmit}>
         <div class="form">
           <label>First Name:</label>
@@ -57,7 +58,7 @@ function SignUp() {
             required
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button type="submit">SIGN UP</button>
       </form>
     </div>
   );
