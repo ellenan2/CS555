@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Work Service Request Form</title>
+</head>
+<body>
+	<div id="work-service-request-form">
+		<h1 id="form-heading">Work Service Request Form</h1>
+		<form action="submit.php" method="post">
+			<label for="name" id="name-label">Name:</label>
+			<input type="text" id="name" name="name" required>
+
+			<label for="phone" id="phone-label">Phone:</label>
+			<input type="tel" id="phone" name="phone" required>
+
+			<label for="service" id="service-label">Service:</label>
+			<select id="service" name="service" required>
+				<option value="">Select a Service</option>
+				<option value="service1">Plumbing</option>
+				<option value="service2">Electrical</option>
+				<option value="service3">Carpentry</option>
+				<option value="service4">Painting</option>
+			</select>
+
+			<label for="description" id="description-label">Description:</label>
+			<textarea id="description" name="description" rows="5" cols="30" required></textarea>
+
+			<input type="submit" id="submit-button" value="Submit">
+		</form>
+	</div>
+</body>
+</html>
