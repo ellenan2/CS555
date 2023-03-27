@@ -28,7 +28,7 @@ const exportedMethods = {
         return user;
     },
 
-    async addUser(email, password, fName, lName) {
+    async addUser(email, password, fName, lName, userType) {
         const userCollection = await users();
         const user = await userCollection.findOne({ email: email });
         if (user) {
@@ -43,7 +43,11 @@ const exportedMethods = {
             email: email, 
             firstName: fName,
             lastName: lName,
-            info: 'Other user info TBD in schema, customer input required'
+            info: 'Other user info TBD in schema, customer input required',
+            currentOffers: [],
+            ongoingServices: [],
+            pendingRequests: [],
+            userType: userType
         };
 
         const insertInfo = await userCollection.insertOne(newUser);

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 const Navigation = () => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="#">Solar Webportal</a>
+          <a className="navbar-brand" href="#">Solaris Webportal</a>
           <button
             className="navbar-toggler"
             type="button"
