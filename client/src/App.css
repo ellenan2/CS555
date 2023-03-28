@@ -61,6 +61,16 @@ nav .navbar-nav li a{
 	text-decoration: none;
 }
 
+.left-side {
+	width: 50%;
+	float: left;
+}
+
+.right-side {
+	width: 50%;
+	float: left;
+}
+
 .active {
 	font-weight: bold;
 	color: rgb(207, 4, 4) !important;
