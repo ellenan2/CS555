@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scrolling Offers</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="offers-container">
+    <h2>Current Offers</h2>
+    <ul class="offers-list">
+      <li>Offer 1</li>
+      <li>Offer 2</li>
+      <li>Offer 3</li>
+      <li>Offer 4</li>
+      <li>Offer 5</li>
+    </ul>
+  </div>
+  <div class="request-form-container">
+    <h2>Request a Service</h2>
+    <form action="#" method="post">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="service">Service Requested:</label>
+      <select id="service" name="service" required>
+        <option value="">Select a Service</option>
+        <option value="Service 1">Service 1</option>
+        <option value="Service 2">Service 2</option>
+        <option value="Service 3">Service 3</option>
+        <option value="Service 4">Service 4</option>
+        <option value="Service 5">Service 5</option>
+      </select>
+      <br>
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" required></textarea>
+      <br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <script>
+  (function() {
+  var offersList = document.querySelector('.offers-list');
+  var offersItems = offersList.querySelectorAll('li');
+  var currentOfferIndex = 0;
+  var offerCount = offersItems.length;
+  
+  function showNextOffer() {
+    offersItems[currentOfferIndex].classList.remove('active');
+    currentOfferIndex = (currentOfferIndex + 1) % offerCount;
+    offersItems[currentOfferIndex].classList.add('active');
+  }
+  
+  setInterval(showNextOffer, 5000);
+})();
+</script>
+</body>
+</html>
