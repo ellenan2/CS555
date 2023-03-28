@@ -1,7 +1,10 @@
-// Import all the modules from the same directory
 import { CurrentOffers } from "./currentOffersTesting.js";
 import { offerTesting } from "./offersTesting.js";
 import { UserProfile } from "./userProfileTesting.js";
+if (CurrentOffers && offerTesting && UserProfile) {
+  console.log("Testing successful!");
+} else {
+  console.log("Testing failure...");
+}
 
-// Export all the modules as named exports
 export { CurrentOffers, offerTesting, UserProfile };
