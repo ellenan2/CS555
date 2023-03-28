@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../App.css";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
@@ -14,9 +14,11 @@ function OngoingServices() {
     async function fetchData() {
         try {
             setLoading(true);
-            const { data : services } = await axios.get(
+            const { data } = await axios.get(
                 `http://localhost:3001/services`
-            )
+            );
+            setServiceData(data);
+            setLoading(false);
         } catch (e) {
             setError(true);
             setLoading(false);
@@ -26,7 +28,7 @@ function OngoingServices() {
 
     useEffect(() => {
         console.log("Load services useEffect");
-        fetchData
+        fetchData();
     }, []);
 
     const buildCard = (service) => {

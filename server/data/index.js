@@ -1,6 +1,8 @@
 const userData = require('./users');
+const serviceData = require('./services');
 
 module.exports = {
-    users: userData,
+    services: serviceData,
+    users: userData
 };
 

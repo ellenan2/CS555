@@ -6,9 +6,9 @@ import UserProfile from "./userProfile";
 function Home() {
   return (
     <div>
+      <UserProfile />
       <CurrentOffers />
       <OngoingServices />
-      <UserProfile />
     </div>
   );
 }

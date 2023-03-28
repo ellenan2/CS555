@@ -1,6 +1,6 @@
 const mongoCollections = require('../config/mongoCollections');
 const services = mongoCollections.services;
-const { ObjectId } = require(mongodb);
+const { ObjectId } = require('mongodb');
 const validation = require('../validation');
 
 const exportedMethods = {
@@ -44,12 +44,12 @@ const exportedMethods = {
             cost: cost,
             fromDate: today
         };
-
+        console.log(newService);
         const insertInfo = await serviceCollection.insertOne(newService);
         if (insertInfo.insertedCount === 0) throw 'Failed to create service.';
 
         newService['id'] = insertInfo.insertedId;
-        return { serviceCreated: true };
+        return { serviceCreated: true , createdService: newService};
     },
     
     async updateService() {
