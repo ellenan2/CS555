@@ -6,7 +6,7 @@ const servicesData = require('../data/services');
 router.get('/', async (req, res) => {
   try {
     const services = await servicesData.getServices();
-    res.json(services);
+    res.status(200).json(services);
   } catch (e) {
     res.status(404).json({ message: e });
   }

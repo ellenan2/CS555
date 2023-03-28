@@ -65,15 +65,15 @@ function CurrentOffers() {
     } else {
         return (
             <div className="content">
-            <br />
-            <h1>Current Offers</h1>
-            <br />
-            <div className="container">
-                <div id="offers-list">
-                    {list}
+                <br />
+                <h1>Current Offers</h1>
+                <br />
+                <div className="container">
+                    <div id="offers-list">
+                        {list}
+                    </div>
                 </div>
             </div>
-        </div>
         ); 
     }
 }

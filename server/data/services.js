@@ -27,7 +27,7 @@ const exportedMethods = {
                 workerId: workerId
             }
         );
-        if (worker) {
+        if (service) {
             return { serviceCreated: false };
         }
 
