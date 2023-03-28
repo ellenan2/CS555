@@ -57,8 +57,10 @@ const exportedMethods = {
         return { userGenerated: true, createdUser: newUser };
     },
 
-    async updateUser() {
+    async updateUser(userId, userInfo) {
         // TODO: Update user information
+        let {_id, firstName, lastName, password, email, info, currentOffers, ongoingServices, pendingRequests, userType} = userObj;
+        id = validation.checkId( id, "User ID");
     },
 
 };
