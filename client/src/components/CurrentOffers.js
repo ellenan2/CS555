@@ -14,9 +14,11 @@ function CurrentOffers() {
     async function fetchData() {
         try {
             setLoading(true); 
-            const { data : offers } = await axios.get(
+            const { data } = await axios.get(
                 `http://localhost:3001/offers/`
             )
+            setOfferData(data);
+            setLoading(false);
         } catch (e) {
             setError(true);
             setLoading(false);
@@ -34,6 +36,9 @@ function CurrentOffers() {
             <Card key={offer.id}>
                 <Card.Body>
                     <Card.Title>{offer.title}</Card.Title>
+                    <Card.Subtitle>{offer.description}</Card.Subtitle>
+                    <Card.Text>{offer.fromDate}</Card.Text>
+                    <Card.Text>${offer.price}</Card.Text>
                     <Link to={`/offers/${offer._id}`}>
                         <Card.Text>Go To</Card.Text>
                     </Link>
@@ -65,10 +70,9 @@ function CurrentOffers() {
     } else {
         return (
             <div className="content">
-                <br />
-                <h1>Current Offers</h1>
-                <br />
                 <div className="container">
+                    <br />
+                    <h2>Current Offers</h2>
                     <div id="offers-list">
                         {list}
                     </div>

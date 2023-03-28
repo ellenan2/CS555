@@ -36,6 +36,9 @@ function OngoingServices() {
             <Card key={service.id}>
                 <Card.Body>
                     <Card.Title>{service.title}</Card.Title>
+                    <Card.Subtitle>{service.desc}</Card.Subtitle>
+                    <Card.Text>{service.fromDate}</Card.Text>
+                    <Card.Text>${service.cost}</Card.Text>
                     <Link to = {`/services/${service._id}`}>
                         <Card.Text>Go To</Card.Text>
                     </Link>
@@ -68,9 +71,8 @@ function OngoingServices() {
         return (
             <div className="content">
                 <br />
-                <h1>Ongoing Services</h1>
-                <br />
                 <div className="container">
+                    <h2>Ongoing Services</h2>
                     <div id="offers-list">
                         {list}
                     </div>

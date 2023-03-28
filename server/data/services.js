@@ -20,6 +20,7 @@ const exportedMethods = {
     },
 
     async createService(customerId, workerId, title, desc, cost) {
+        // validation needed
         const serviceCollection = await services();
         const service = await serviceCollection.findOne(
             {
@@ -49,7 +50,7 @@ const exportedMethods = {
         if (insertInfo.insertedCount === 0) throw 'Failed to create service.';
 
         newService['id'] = insertInfo.insertedId;
-        return { serviceCreated: true , createdService: newService};
+        return { serviceCreated: true , createdService: newService };
     },
     
     async updateService() {

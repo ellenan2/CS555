@@ -36,7 +36,7 @@ const exportedMethods = {
         return user;
     },
 
-    async addUser(email, password, fName, lName, userType) {
+    async addUser(email, phone, password, fName, lName, userType) {
         const userCollection = await users();
         const user = await userCollection.findOne({ email: email });
         if (user) {
@@ -48,10 +48,10 @@ const exportedMethods = {
         const h = await bcrypt.hash(password, 10);
         const newUser = {
             password: h,
-            email: email, 
+            email: email,
+            phone: phone,
             firstName: fName,
             lastName: lName,
-            info: 'Other user info TBD in schema, customer input required',
             currentOffers: [],
             ongoingServices: [],
             pendingRequests: [],

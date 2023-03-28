@@ -7,43 +7,44 @@ const exportedMethods = {
   async getOffers() {
     const offersCollection = await offers();
     const offerList = await offersCollection.find({}).toArray();
+    if (!offerList) throw 'No current offers in database for user.';
     return offerList;
   },
 
-  async getOfferById(id) {
-    if (!id) throw 'You must provide an id to search for';
-    if (typeof id !== 'string' || !ObjectId.isValid(id)) {
-      throw 'Invalid id';
-    }
+  async getOfferById(offerId) {
+    offerId = validation.checkId(offerId, 'Offer ID');
 
     const offersCollection = await offers();
-    const offer = await offersCollection.findOne({ _id: new ObjectId(id) });
-    if (!offer) throw `Offer with id ${id} not found`;
-
+    const offer = await offersCollection.findOne({ _id: ObjectId(offerId) });
+    if (!offer) throw 'Offer not found.';
     return offer;
   },
 
-  async createOffer(title, description, price) {
-    if (!title || typeof title !== 'string') throw 'You must provide a title';
-    if (!description || typeof description !== 'string') {
-      throw 'You must provide a description';
-    }
-    if (!price || typeof price !== 'number' || price <= 0) {
-      throw 'You must provide a valid price';
-    }
+  async createOffer(customerId, salesRepId, title, description, price) {
+    validation.checkString(title, 'Title');
+    validation.checkString(description, 'Description');
+    validation.checkCost(price, 'Price');
 
     const offersCollection = await offers();
+    let today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
     const newOffer = {
-      title: title,
-      description: description,
-      price: price,
+        customerId: customerId,
+        salesRepId: salesRepId,
+        title: title,
+        description: description,
+        fromDate: today,
+        price: price
     };
+
     const insertInfo = await offersCollection.insertOne(newOffer);
     if (insertInfo.insertedCount === 0) throw 'Could not add offer';
 
-    const newId = insertInfo.insertedId;
-    const offer = await this.getOfferById(newId.toString());
-    return offer;
+    newOffer['id'] = insertInfo.insertedId;
+    return { offerCreated: true, createdOffer: newOffer };
   },
 
   async updateOffer(id, updatedOffer) {
