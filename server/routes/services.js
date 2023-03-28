@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const servicesData = require('../data/services');
 
-// GET all services
+// Get all services
 router.get('/', async (req, res) => {
   try {
     const services = await servicesData.getServices();
