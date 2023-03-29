@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import UserProfile from "../components/UserProfile";
+import UserProfile from "../components/userProfile.js";
 
 describe("UserProfile", () => {
   it("renders the user profile with correct props", () => {
@@ -10,7 +10,7 @@ describe("UserProfile", () => {
       email: "john.doe@example.com",
       phoneNumber: "+1 123-456-7890",
     };
-    const wrapper = shallow(<UserProfile {...props} />);
+    const wrapper = shallow(React.createElement(UserProfile, {...props}));
     expect(wrapper.find(".user-profile")).toHaveLength(1);
     expect(wrapper.find("img").prop("src")).toEqual(props.profilePicture);
     expect(wrapper.find("h2").at(0).text()).toEqual(props.name);

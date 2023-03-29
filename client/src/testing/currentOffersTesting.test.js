@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import CurrentOffers from './CurrentOffers';
+import CurrentOffers from '../components/CurrentOffers.js';
 
 describe('CurrentOffers component', () => {
   it('renders without crashing', () => {
-    shallow(<CurrentOffers />);
+    shallow(React.createElement(CurrentOffers));
   });
 });
