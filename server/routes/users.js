@@ -5,6 +5,15 @@ const userData = data.users;
 const validation = require('../validation');
 // const bcrypt = require('bcrypt');
 
+router.get("/billing", async (req, res) => {
+    try {
+      const users = await userData.getUsers();
+      res.status(200).json(users);
+    } catch (e) {
+      res.status(500).json({ message: e });
+    }
+  });
+
 router.post('/login', async (req,res) => {
     const login = req.body;
     try {

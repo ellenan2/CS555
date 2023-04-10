@@ -27,6 +27,12 @@ const exportedMethods = {
         if (!user) throw 'User not found.';
         return user;
     },
+    async getUserBillingHistoryById(id) {
+        const user = await this.getUserById(id);
+        if(!user) throw 'getUserById failed';
+        const billingHistory = user.billingHistory;
+        return billingHistory;
+    },
 
     async getUserByEmail(email) {
         email = validation.checkEmail(email, 'Email');
@@ -55,6 +61,7 @@ const exportedMethods = {
             currentOffers: [],
             ongoingServices: [],
             pendingRequests: [],
+            billingHistory: [],
             userType: userType
         };
 
@@ -70,6 +77,8 @@ const exportedMethods = {
         let {_id, firstName, lastName, password, email, info, currentOffers, ongoingServices, pendingRequests, userType} = userObj;
         id = validation.checkId( id, "User ID");
     },
+
+
 
 };
 
