@@ -1,0 +1,72 @@
+<<<<<<< HEAD
+/* Style for the BillingPage component */
+div {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th {
+    background-color: #9ba19b;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+=======
+/* Style for the BillingPage component */
+div {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th {
+    background-color: #9ba19b;
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+>>>>>>> 4cf9f1bff8dc6d090b72eaea994c90d019c987c5
+  
