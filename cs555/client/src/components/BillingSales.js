@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
+import axios from "axios";
 
 const BillingSales = () => {
   const [sales, setSales] = useState([]);
 
   useEffect(() => {
-    const fetchSales = async () => {
-      const response = await fetch("/api/sales"); //ask about db connection (for sales)
-      const data = await response.json();
-      setSales(data);
-    };
-
-    fetchSales();
+    try {
+      setLoading(true);
+      const fetchSales = async () => {
+        const { data } = await axios.get(
+          `http://localhost:3001/users/billing/`
+        );
+        setSales(data);
+        setLoading(false);
+      };
+      fetchSales();
+    } catch (e) {
+      setError(true);
+      setLoading(false);
+      console.log(e);
+    }
   }, []);
 
   return (
