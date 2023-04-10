@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "http:///process_get",
+            "request": "launch",
+            "url": "http:///process_get"
+        }
+    ]
+}
