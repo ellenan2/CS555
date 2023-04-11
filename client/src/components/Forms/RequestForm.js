@@ -20,9 +20,10 @@ function RequestForm() {
                 <div id='work-service-request-form'>
                     <h2 id='form-heading'>Work Service Request Form</h2>
                     <form onSubmit={handleSubmit}>
-                        <div className="input-group">
+                        <div className="form-group">
                             <label htmlFor="name">Name: </label>
                             <input 
+                                className="form-control"
                                 type="text"
                                 id="name"
                                 value={name}
@@ -30,9 +31,10 @@ function RequestForm() {
                                 required
                             />
                         </div>
-                        <div className="input-group">
+                        <div className="form-group">
                             <label htmlFor="phone">Phone: </label>
-                            <input 
+                            <input
+                                className="form-control"
                                 type="text"
                                 id="phone"
                                 value={name}

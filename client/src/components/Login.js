@@ -1,33 +1,53 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AuthContext } from '../firebase/Auth';
+import { doSignInWithEmailAndPassword } from '../firebase/FirebaseFunctions';
 import '../App.css';
 
 function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const {currentUser} = useContext(AuthContext);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    let {email, password} = event.target.elements;
+    try {
+      await doSignInWithEmailAndPassword(email.value, password.value);
+    } catch (e) {
+      alert(e);
+    }
+  };
 
-    // Do something with the username and password values
-
-    setUsername('');
-    setPassword('');
+  if (currentUser) {
+    return <Navigate to='/' />;
   }
-
   return (
     <div className = 'content'>
       <br />
       <div className = 'container'>
+        <h1>Login</h1>
+        <br />
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="username">Username: </label>
-            <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <div className="form-group">
+            <label>Email: </label>
+            <input 
+              className='form-control'
+              type="email" 
+              id="email" 
+              placeholder='Email'
+              required
+            />
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Password: </label>
-            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <div className="form-group">
+            <label>Password: </label>
+            <input 
+              className='form-control'
+              type="password" 
+              id="password" 
+              placeholder='Password'
+              required
+            />
           </div>
-          <button type="submit">Log In</button>
+          <button className="btn btn-outline-success" type="submit">Log In</button>
         </form>
       </div>
     </div>

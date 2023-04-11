@@ -1,69 +1,90 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from 'react';
+import {Navigate} from 'react-router-dom';
+import {doCreateUserWithEmailAndPassword} from '../firebase/FirebaseFunctions';
+import {AuthContext} from '../firebase/Auth';
 import "../App.css";
 
 function SignUp() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const {currentUser} = useContext(AuthContext);
+const [match, setMatch] = useState('');
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const {firstName, lastName, email, password, confirm} = event.target.elements;
+    if (password.value !== confirm.value) {
+      setMatch('Password fields must match!');
+      return false;
+    }
 
-    // Do something with the form values
-
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setPassword("");
+    try {
+      await doCreateUserWithEmailAndPassword(
+        email.value,
+        password.value,
+        firstName.value,
+        lastName.value
+      );
+    } catch (e) {
+      alert(e);
+    }
   };
 
+  if (currentUser) {
+    return <Navigate to='/' />;
+  }
   return (
     <div className = 'content'>
       <br />
       <div className = 'container'>
+        <h1>Sign Up</h1>
+        <br />
+        {match && <h4 className='error'>{match}</h4>}
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <label htmlFor="fname">First Name: </label>
+          <div className="form-group">
+            <label>First Name: </label>
             <input
-              type="text"
-              id="fname"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              className='form-control'
+              type='text'
+              id='firstName'
               required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="lname">Last Name: </label>
+          <div className="form-group">
+            <label>Last Name: </label>
             <input
-              type="text"
-              id="lname"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              className='form-control'
+              type='text'
+              id='lastName'
               required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="email">Email: </label>
+          <div className="form-group">
+            <label>Email: </label>
             <input
+              className='form-control'
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-          <div className="input-group">
-            <label htmlFor="password">Password: </label>
+          <div className="form-group">
+            <label>Password: </label>
             <input
+              className='form-control'
               type="password"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
-          <button type="submit">Sign Up</button>
+          <div className="form-group">
+            <label>Confirm Password: </label>
+            <input
+              className='form-control'
+              type="password"
+              id="confirm"
+              required
+            />
+          </div>
+          <button className="btn btn-outline-success" type="submit">Sign Up</button>
         </form>
       </div>
     </div>
