@@ -1,55 +1,84 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import { render, waitFor } from '@testing-library/react';
-import SalesRepBillingPage from './SalesRepBillingPage';
+import React from "react";
+import axios from "axios";
+import { render, screen } from "@testing-library/react";
+import SalesRepBillingPage from "./SalesRepBillingPage";
 
-jest.mock('axios');
+jest.mock("axios");
 
-describe('SalesRepBillingPage', () => {
-  it('should render sales data', async () => {
-    const testData = [
-      {
-        service: 'Service 1',
-        description: 'Description 1',
-        date: '2022-05-01',
-        customer: 'Customer 1',
-        amount: 100
-      },
-      {
-        service: 'Service 2',
-        description: 'Description 2',
-        date: '2022-05-02',
-        customer: 'Customer 2',
-        amount: 200
-      }
-    ];
-
-    axios.get.mockResolvedValue({ data: testData });
-
-    const { getByText } = render(<SalesRepBillingPage />);
-
-    await waitFor(() => {
-      expect(getByText('Service 1')).toBeInTheDocument();
-      expect(getByText('Description 1')).toBeInTheDocument();
-      expect(getByText('2022-05-01')).toBeInTheDocument();
-      expect(getByText('Customer 1')).toBeInTheDocument();
-      expect(getByText('100.00')).toBeInTheDocument();
-
-      expect(getByText('Service 2')).toBeInTheDocument();
-      expect(getByText('Description 2')).toBeInTheDocument();
-      expect(getByText('2022-05-02')).toBeInTheDocument();
-      expect(getByText('Customer 2')).toBeInTheDocument();
-      expect(getByText('200.00')).toBeInTheDocument();
-    });
+describe("SalesRepBillingPage", () => {
+  beforeEach(() => {
+    axios.get.mockReset();
   });
 
-  it('should handle error while fetching sales data', async () => {
-    axios.get.mockRejectedValue({});
+  it("displays sales information", async () => {
+    const mockData = [
+      {
+        service: "Service A",
+        description: "Description A",
+        date: "2022-01-01",
+        customer: "Customer A",
+        amount: 100.0,
+      },
+      {
+        service: "Service B",
+        description: "Description B",
+        date: "2022-02-01",
+        customer: "Customer B",
+        amount: 200.0,
+      },
+    ];
 
-    const { getByText } = render(<SalesRepBillingPage />);
+    axios.get.mockResolvedValueOnce({ data: mockData });
 
-    await waitFor(() => {
-      expect(getByText('Error fetching sales data')).toBeInTheDocument();
-    });
+    render(<SalesRepBillingPage />);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "http://localhost:3001/users/billing/"
+    );
+
+    const serviceA = await screen.findByText("Service A");
+    expect(serviceA).toBeInTheDocument();
+
+    const serviceB = await screen.findByText("Service B");
+    expect(serviceB).toBeInTheDocument();
+
+    const descriptionA = await screen.findByText("Description A");
+    expect(descriptionA).toBeInTheDocument();
+
+    const descriptionB = await screen.findByText("Description B");
+    expect(descriptionB).toBeInTheDocument();
+
+    const dateA = await screen.findByText("2022-01-01");
+    expect(dateA).toBeInTheDocument();
+
+    const dateB = await screen.findByText("2022-02-01");
+    expect(dateB).toBeInTheDocument();
+
+    const customerA = await screen.findByText("Customer A");
+    expect(customerA).toBeInTheDocument();
+
+    const customerB = await screen.findByText("Customer B");
+    expect(customerB).toBeInTheDocument();
+
+    const amountA = await screen.findByText("100.00");
+    expect(amountA).toBeInTheDocument();
+
+    const amountB = await screen.findByText("200.00");
+    expect(amountB).toBeInTheDocument();
+  });
+
+  it("displays an error message if sales information cannot be fetched", async () => {
+    const errorMessage = "An error occurred while fetching sales information.";
+
+    axios.get.mockRejectedValueOnce(new Error(errorMessage));
+
+    render(<SalesRepBillingPage />);
+
+    expect(axios.get).toHaveBeenCalledWith(
+      "http://localhost:3001/users/billing/"
+    );
+
+    const error = await screen.findByText(errorMessage);
+    expect(error).toBeInTheDocument();
   });
 });
