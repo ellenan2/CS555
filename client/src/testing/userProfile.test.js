@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import UserProfile from "../userProfile";
+import UserProfile from "../UserProfile";
 
 describe("UserProfile component", () => {
   it("renders the user profile information", async () => {
