@@ -42,7 +42,7 @@ const exportedMethods = {
         if (user) {
             // Necessary for testing if user in db:
             // Returns Object containing boolean variable for frontend if user exists in db
-            return { userGenerated: false };
+            return { userGenerated: false, createdUser: user };
         }
         // bcrypt hashing for passwords
         const h = await bcrypt.hash(password, 10);
@@ -71,6 +71,13 @@ const exportedMethods = {
         id = validation.checkId( id, "User ID");
     },
 
+    async addOffer(customerId, offer) {
+        // TODO: Send offer to customer
+    },
+
+    async addService(customerId, offer) {
+        // TODO: Add service request to customer
+    }
 };
 
 module.exports = exportedMethods;

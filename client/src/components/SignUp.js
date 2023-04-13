@@ -84,6 +84,20 @@ const [match, setMatch] = useState('');
               required
             />
           </div>
+          <div className="form-group">
+            <label>Type: </label>
+            <select
+              className='form-control'
+              type='text'
+              id='type'
+              required
+            >
+              <option value="Customer">Customer</option>
+              <option value="SalesRep">Sales Representative</option>
+              <option value="Manager">Manager</option>
+              <option value="Crew">Crew</option>
+            </select>
+          </div>
           <button className="btn btn-outline-success" type="submit">Sign Up</button>
         </form>
       </div>

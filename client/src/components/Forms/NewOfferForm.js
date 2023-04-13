@@ -38,7 +38,7 @@ function RequestForm() {
         <div id="work-service-request-form">
           <h2 id="form-heading">Work Service Request Form</h2>
           <form onSubmit={handleSubmit}>
-            {/* <div className="form-group">
+            <div className="form-group">
               <label htmlFor="customerId">Customer ID: </label>
               <input
                 className="form-control"
@@ -48,18 +48,7 @@ function RequestForm() {
                 onChange={(e) => setCustomerId(e.target.value)}
                 required
               />
-            </div> */}
-            {/* <div className="form-group">
-              <label htmlFor="workerId">Worker ID: </label>
-              <input
-                className="form-control"
-                type="text"
-                id="workerId"
-                value={workerId}
-                onChange={(e) => setWorkerId(e.target.value)}
-                required
-              />
-            </div> */}
+            </div>
             <div className="form-group">
               <label htmlFor="title">Title: </label>
               <input
@@ -82,7 +71,7 @@ function RequestForm() {
               ></textarea>
             </div>
             <div className="form-group">
-              <label htmlFor="cost">Cost: </label>
+              <label htmlFor="cost">Offer: </label>
               <input
                 className="form-control"
                 type="text"

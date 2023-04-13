@@ -35,10 +35,11 @@ function UserProfile(props) {
         <Card.Header>User Profile</Card.Header>
           <Card.Body>
             <Card.Title>{currentUser.displayName}</Card.Title>
-            <Card.Subtitle>Customer</Card.Subtitle>
+            <Card.Subtitle>Sales Representative</Card.Subtitle>
             <ListGroup className="list-group-flush">
-              <ListGroup.Item>Phone: 123-123-1234</ListGroup.Item>
-              <ListGroup.Item>{currentUser.email}</ListGroup.Item>
+              <ListGroup.Item>Company: XYZ Solar</ListGroup.Item>
+              <ListGroup.Item>Phone: ###-###-####</ListGroup.Item>
+              <ListGroup.Item>Email: {currentUser.email}</ListGroup.Item>
             </ListGroup>
           </Card.Body>
       </Card>

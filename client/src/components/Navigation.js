@@ -76,7 +76,7 @@ const Auth = () => {
                   Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <NavLink className="nav-link" to='/home'>Dashboard</NavLink>
+                  <NavLink className="nav-link" to='/sales'>Dashboard</NavLink>
                   <NavLink className="nav-link" to='/profile'>Account</NavLink>
                   <div className="dropdown-divider"></div>
                   <NavLink className="btn btn-sm btn-outline-secondary" to='/login' onClick={doSignOut}>Logout</NavLink>

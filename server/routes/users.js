@@ -50,7 +50,12 @@ router.post('/signup', async (req,res) => {
 });
 
 router.get('/logout', async (req,res) => {
-    // TODO: User logout
+    try {
+        req.session.email = undefined;
+        res.status(200).json("Logout success.");
+    } catch (e) {
+        return res.status(500).json({error: e});
+    }
 });
 
 

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import firebase from 'firebase/app';
+import { getSessionToken } from '../firebase/FirebaseFunctions';
 import "../App.css";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
@@ -11,11 +13,20 @@ function OngoingServices() {
     const [serviceData, setServiceData] = useState(undefined);
     let list = null;
 
+    const email = firebase.auth().currentUser.email;
+    const accessToken = getSessionToken();
+    const headers = {headers: {
+      email: email,
+      accesstoken: accessToken,
+      'Access-Control-Allow-Origin': '*'
+    }};
+
     async function fetchData() {
         try {
             setLoading(true);
             const { data } = await axios.get(
-                `http://localhost:3001/services`
+                `http://localhost:3001/services`,
+                headers
             );
             setServiceData(data);
             setLoading(false);

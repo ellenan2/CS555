@@ -1,25 +1,22 @@
+const mongoCollections = require('../config/mongoCollections');
+const data = require('../data');
+const userData = data.users;
+const offerData = data.offers;
 const express = require("express");
 const router = express.Router();
-const {
-  getOffers,
-  getOfferById,
-  createOffer,
-  updateOfferById,
-  deleteOfferById,
-} = require("../data/offers");
 
 router.get("/", async (req, res) => {
   try {
-    const offers = await getOffers();
+    const offers = await offerData.getOffers();
     res.status(200).json(offers);
   } catch (e) {
-    res.status(500).json({ message: e });
+    res.status(404).json({ message: e });
   }
 });
 
 router.get("/:id", async (req, res) => {
   try {
-    const offer = await getOfferById(req.params.id);
+    const offer = await offerData.getOfferById(req.params.id);
     res.status(200).json(offer);
   } catch (e) {
     res.status(404).json({ message: e });
@@ -33,7 +30,7 @@ router.post("/", async (req, res) => {
     return;
   }
   try {
-    const newOffer = await createOffer(
+    const newOffer = await offerData.createOffer(
       customerId,
       salesRepId,
       title,
@@ -48,7 +45,7 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const updatedOffer = await updateOfferById(req.params.id, req.body);
+    const updatedOffer = await offerData.updateOfferById(req.params.id, req.body);
     res.json(updatedOffer);
   } catch (e) {
     res.status(404).json({ message: e });
@@ -57,7 +54,7 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    await deleteOfferById(req.params.id);
+    await offerData.deleteOfferById(req.params.id);
     res.json({ message: "Offer deleted successfully" });
   } catch (e) {
     res.status(404).json({ message: e });

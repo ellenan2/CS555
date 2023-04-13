@@ -7,8 +7,8 @@ import Landing from "./Landing";
 import Login from "./Login";
 import SignUp from "./SignUp";
 import Home from "./Home";
-import UserProfile from "./userProfile";
-import RequestForm from './Forms/RequestForm';
+import UserProfile from "./UserProfile";
+import Sales from "./Sales";
 
 function App() {
   return (
@@ -29,13 +29,9 @@ function App() {
           <Route path='/profile' element={<Private />}>
             <Route path='/profile' element={<UserProfile />} />
           </Route>
-          <Route path='/request' element={<Private />}>
-            <Route path='/request' element={<RequestForm />} />
+          <Route path='/sales' element={<Private />}>
+            <Route path='/sales' element={<Sales />} />
           </Route>
-
-          
-          {/* <Route path='/offers/:offerId' element={<Offer />} />
-          <Route path='/services/:serviceId' element={<Service />} /> */}
         </Routes>
       </Router>
     </AuthProvider>
