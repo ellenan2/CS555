@@ -7,21 +7,33 @@ import "../App.css";
 function SignUp() {
 const {currentUser} = useContext(AuthContext);
 const [match, setMatch] = useState('');
+const [userCode, setUserCode] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const {firstName, lastName, email, password, confirm} = event.target.elements;
+    const {firstName, lastName, phone, email, password, confirm, userType} = event.target.elements;
     if (password.value !== confirm.value) {
       setMatch('Password fields must match!');
       return false;
     }
-
     try {
+      if (userType.value === 'Customer') {
+        setUserCode('0');
+      } else if (userType.value === 'SalesRep') {
+        setUserCode('1');
+      } else if (userType.value === 'Manager') {
+        setUserCode('2');
+      } else {
+        setUserCode('3');
+      }
+      console.log(userType.value);
       await doCreateUserWithEmailAndPassword(
         email.value,
+        phone.value,
         password.value,
         firstName.value,
-        lastName.value
+        lastName.value,
+        userCode
       );
     } catch (e) {
       alert(e);
@@ -58,6 +70,15 @@ const [match, setMatch] = useState('');
             />
           </div>
           <div className="form-group">
+            <label>Phone: </label>
+            <input
+              className='form-control'
+              type="phone"
+              id="phone"
+              required
+            />
+          </div>
+          <div className="form-group">
             <label>Email: </label>
             <input
               className='form-control'
@@ -89,7 +110,7 @@ const [match, setMatch] = useState('');
             <select
               className='form-control'
               type='text'
-              id='type'
+              id='userType'
               required
             >
               <option value="Customer">Customer</option>

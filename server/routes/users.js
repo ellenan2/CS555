@@ -9,12 +9,12 @@ router.post('/login', async (req,res) => {
     const login = req.body;
     try {
         console.log("Login endpoint.");
-        let { username, password } = login;
-        username = validation.checkString(user, 'Username');
+        let { email, password } = login;
+        email = validation.checkString(email, 'Username');
         password = validation.checkPassword(password, 'Password');
         let user;
         try {
-            user = await userData.getUserByUser(user);
+            user = await userData.getUserByEmail(email);
         } catch (e) {
             e.message = 'User not found.';
             return res.status(404).json({ error: e });
@@ -35,10 +35,12 @@ router.post('/signup', async (req,res) => {
     const user = req.body;
     try {
         console.log("Signup endpoint.");
-        let { username, password } = user;
-        username = validation.checkString(username, 'Username');
+        let { email, phone, password, firstName, lastName, userType } = user;
+        firstName = validation.checkString(firstName, 'First Name');
+        lastName = validation.checkString(lastName, 'Last Name');
+        email = validation.checkString(email, 'Username');
         password = validation.checkPassword(password, 'Password');
-        const newUser = await userData.addUser(username, password);
+        const newUser = await userData.addUser(email, phone, password, firstName, lastName, userType);
         if (!newUser.userCreated) {
             return res.status(404).json({ error: 'Failed to add user.' });
         }

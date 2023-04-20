@@ -1,15 +1,17 @@
 import firebase from 'firebase/app';
 import axios from 'axios';
 
-async function doCreateUserWithEmailAndPassword(email, password, firstName, lastName) {
+async function doCreateUserWithEmailAndPassword(email, phone, password, firstName, lastName, userType) {
   await firebase.auth().createUserWithEmailAndPassword(email, password);
   await firebase.auth().currentUser.updateProfile({ displayName: firstName + " " + lastName });
   const accessToken = getSessionToken();
   const formData = {
     email: email,
+    phone: phone,
     password: password,
     firstName: firstName,
     lastName: lastName,
+    userType: userType,
     uid: firebase.auth().currentUser.uid
   };
   await axios({

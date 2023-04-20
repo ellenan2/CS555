@@ -63,6 +63,14 @@ const Auth = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                  <NavLink className="nav-link" to='/sales'>Dashboard</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to='/profile'>Account</NavLink>
+              </li>
+            </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item dropdown">
                 <a 
@@ -76,9 +84,6 @@ const Auth = () => {
                   Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <NavLink className="nav-link" to='/sales'>Dashboard</NavLink>
-                  <NavLink className="nav-link" to='/profile'>Account</NavLink>
-                  <div className="dropdown-divider"></div>
                   <NavLink className="btn btn-sm btn-outline-secondary" to='/login' onClick={doSignOut}>Logout</NavLink>
                 </div>
               </li>
