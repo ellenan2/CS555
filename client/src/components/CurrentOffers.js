@@ -21,26 +21,25 @@ function CurrentOffers() {
       'Access-Control-Allow-Origin': '*'
     }};
 
-    async function fetchData() {
-        try {
-            setLoading(true); 
-            const { data } = await axios.get(
-                `http://localhost:3001/offers/`,
-                headers
-            )
-            setOfferData(data);
-            setLoading(false);
-        } catch (e) {
-            setError(true);
-            setLoading(false);
-            console.log(e);
-        }
-    };
-
     useEffect(() => {
+        async function fetchData() {
+            try {
+                setLoading(true); 
+                const { data } = await axios.get(
+                    `http://localhost:3001/offers/`,
+                    headers
+                )
+                setOfferData(data);
+                setLoading(false);
+            } catch (e) {
+                setError(true);
+                setLoading(false);
+                console.log(e);
+            }
+        }
         console.log("Load offers useEffect");
         fetchData();
-    }, []);
+    }, [headers]);
 
     const buildCard = (offer) => {
         return (

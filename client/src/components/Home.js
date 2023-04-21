@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useContext} from "react";
-import { AuthContext } from "../firebase/Auth";
+// import React, {useState, useEffect, useContext} from "react";
+import React, {useState} from "react";
+// import { AuthContext } from "../firebase/Auth";
 import Button from 'react-bootstrap/Button';
 import CurrentOffers from "./CurrentOffers";
 import OngoingServices from "./OngoingServices";
@@ -7,10 +8,10 @@ import RequestForm from "./Forms/RequestForm";
 import "../App.css";
 
 function Home() {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState(false);
   const [addBtnToggle, setBtnToggle] = useState(false);
-  const {currentUser} = useContext(AuthContext)
+  // const {currentUser} = useContext(AuthContext)
 
   return (
     <div >
