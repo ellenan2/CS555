@@ -10,6 +10,7 @@ import Home from "./Home";
 import UserProfile from "./UserProfile";
 import Sales from "./Sales";
 
+//
 function App() {
   return (
     <AuthProvider>
