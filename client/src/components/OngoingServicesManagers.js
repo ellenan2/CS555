@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from 'firebase/app';
 import { getSessionToken } from '../firebase/FirebaseFunctions';
 import "../App.css";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -15,33 +15,52 @@ function OngoingServices() {
 
     const email = firebase.auth().currentUser.email;
     const accessToken = getSessionToken();
-    const headers = {headers: {
-      email: email,
-      accesstoken: accessToken,
-      'Access-Control-Allow-Origin': '*'
-    }};
+    const headers = {
+        headers: {
+            email: email,
+            accesstoken: accessToken,
+            'Access-Control-Allow-Origin': '*'
+        }
+    };
+
+    async function fetchData() {
+        try {
+            setLoading(true);
+            const { data } = await axios.get(
+                `http://localhost:3001/services`,
+                headers
+            );
+            setServiceData(data);
+            setLoading(false);
+        } catch (e) {
+            setError(true);
+            setLoading(false);
+            console.log(e);
+        }
+    };
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                setLoading(true);
-                const { data } = await axios.get(
-                    `http://localhost:3001/services`,
-                    headers
-                );
-                setServiceData(data);
-                setLoading(false);
-            } catch (e) {
-                setError(true);
-                setLoading(false);
-                console.log(e);
-            }
-        }
         console.log("Load services useEffect");
         fetchData();
-    }, [headers]);
+    }, []);
 
     const buildCard = (service) => {
+        const [status, setStatus] = useState(service.status);
+
+        const handleStatusChange = async (e) => {
+            try {
+                const { value } = e.target;
+                setStatus(value);
+                await axios.patch(
+                    `http://localhost:3001/services/${service.id}`,
+                    { status: value },
+                    headers
+                );
+            } catch (e) {
+                console.log(e);
+            }
+        };
+
         return (
             <Card key={service.id}>
                 <Card.Body>
@@ -49,7 +68,11 @@ function OngoingServices() {
                     <Card.Subtitle>{service.desc}</Card.Subtitle>
                     <Card.Text>{service.fromDate}</Card.Text>
                     <Card.Text>${service.cost}</Card.Text>
-                    <Link to = {`/services/${service._id}`}>
+                    <select value={status} onChange={handleStatusChange}>
+                        <option value="in progress">In Progress</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <Link to={`/services/${service._id}`}>
                         <Card.Text>Go To</Card.Text>
                     </Link>
                 </Card.Body>
@@ -62,7 +85,7 @@ function OngoingServices() {
         && serviceData.map((service) => {
             return buildCard(service);
         });
-    
+
     if (loading) {
         console.log("Loading...");
         return (
@@ -88,7 +111,7 @@ function OngoingServices() {
                     </div>
                 </div>
             </div>
-        ); 
+        );
     }
 }
 
