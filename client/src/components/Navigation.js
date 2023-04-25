@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../firebase/Auth';
 import {doSignOut} from '../firebase/FirebaseFunctions';
 
 const Navigation = () => {
   const {currentUser} = useContext(AuthContext);
+  const {userData} = useContext(AuthContext);
+  const [code, setCode] = useState(0);
+  // setCode(Number(userData));
   return <div>{currentUser ? <Auth /> : <NonAuth />}</div>;
 }
 
@@ -36,7 +39,7 @@ const NonAuth = () => {
                 aria-expanded="false">
                   Account
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <NavLink className="dropdown-item" to='/signup'>Sign-up</NavLink>
                 <NavLink className="dropdown-item" to='/login'>Sign-In</NavLink>
               </div>
@@ -65,7 +68,7 @@ const Auth = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                  <NavLink className="nav-link" to='/sales'>Dashboard</NavLink>
+                <NavLink className="nav-link" to='/home'>Dashboard</NavLink>
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" to='/profile'>Account</NavLink>
@@ -83,7 +86,7 @@ const Auth = () => {
                 aria-expanded="false">
                   Account
                 </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <NavLink className="btn btn-sm btn-outline-secondary" to='/login' onClick={doSignOut}>Logout</NavLink>
                 </div>
               </li>

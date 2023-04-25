@@ -1,7 +1,8 @@
 const usersRoutes = require("./users");
 const serviceRoutes = require("./services");
 const offerRoutes = require("./offers");
-const billingRoutes = require("./billingCust");
+const billingRoutes = require("./billing");
+
 const constructorMethod = (app) => {
   app.use("/", usersRoutes);
   app.use("/services", serviceRoutes);

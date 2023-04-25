@@ -20,10 +20,10 @@ const exportedMethods = {
     return billing;
   },
 
-  async createbilling(title, description, Total) {
+  async createbilling(title, description, total) {
     validation.checkString(title, 'Title');
     validation.checkString(description, 'Description');
-    validation.checkCost(Total, 'Total');
+    validation.checkCost(total, 'Total');
 
     const billingCollection = await billing();
     let today = new Date();
@@ -35,7 +35,7 @@ const exportedMethods = {
         title: title,
         description: description,
         fromDate: today,
-        Total: Total
+        total: total
     };
 
     const insertInfo = await billingCollection.insertOne(newbilling);

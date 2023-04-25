@@ -4,7 +4,7 @@ import '../App.css';
 
 function Landing() {
   return (
-    <div class="container">
+    <div className="container">
       <h1>Welcome to the Solaris Webportal</h1>
       <p>
         *PLACEHOLDER* This webportal will facilitate better communication between

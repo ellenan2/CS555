@@ -7,7 +7,6 @@ import "../App.css";
 function SignUp() {
 const {currentUser} = useContext(AuthContext);
 const [match, setMatch] = useState('');
-const [userCode, setUserCode] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,23 +16,13 @@ const [userCode, setUserCode] = useState('');
       return false;
     }
     try {
-      if (userType.value === 'Customer') {
-        setUserCode('0');
-      } else if (userType.value === 'SalesRep') {
-        setUserCode('1');
-      } else if (userType.value === 'Manager') {
-        setUserCode('2');
-      } else {
-        setUserCode('3');
-      }
-      console.log(userType.value);
       await doCreateUserWithEmailAndPassword(
         email.value,
         phone.value,
         password.value,
         firstName.value,
         lastName.value,
-        userCode
+        userType.value
       );
     } catch (e) {
       alert(e);
@@ -113,10 +102,10 @@ const [userCode, setUserCode] = useState('');
               id='userType'
               required
             >
-              <option value="Customer">Customer</option>
-              <option value="SalesRep">Sales Representative</option>
-              <option value="Manager">Manager</option>
-              <option value="Crew">Crew</option>
+              <option value="0">Customer</option>
+              <option value="1">Sales Representative</option>
+              <option value="2">Manager</option>
+              <option value="3">Crew</option>
             </select>
           </div>
           <button className="btn btn-outline-success" type="submit">Sign Up</button>
