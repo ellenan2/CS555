@@ -21,26 +21,25 @@ function OngoingServices() {
       'Access-Control-Allow-Origin': '*'
     }};
 
-    async function fetchData() {
-        try {
-            setLoading(true);
-            const { data } = await axios.get(
-                `http://localhost:3001/services`,
-                headers
-            );
-            setServiceData(data);
-            setLoading(false);
-        } catch (e) {
-            setError(true);
-            setLoading(false);
-            console.log(e);
-        }
-    };
-
     useEffect(() => {
+        async function fetchData() {
+            try {
+                setLoading(true);
+                const { data } = await axios.get(
+                    `http://localhost:3001/services`,
+                    headers
+                );
+                setServiceData(data);
+                setLoading(false);
+            } catch (e) {
+                setError(true);
+                setLoading(false);
+                console.log(e);
+            }
+        }
         console.log("Load services useEffect");
         fetchData();
-    }, []);
+    }, [headers]);
 
     const buildCard = (service) => {
         return (

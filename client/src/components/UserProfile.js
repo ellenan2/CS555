@@ -22,7 +22,8 @@ function UserProfile(props) {
       }
     }
     fetchData();
-  }, []);
+  }, [currentUser]);
+
   
   if (loading) {
     return (
