@@ -29,6 +29,7 @@ function OngoingServices() {
                     `http://localhost:3001/services`,
                     headers
                 );
+                console.log(data);
                 setServiceData(data);
                 setLoading(false);
             } catch (e) {
@@ -39,7 +40,7 @@ function OngoingServices() {
         }
         console.log("Load services useEffect");
         fetchData();
-    }, [headers]);
+    }, []);
 
     const buildCard = (service) => {
         return (

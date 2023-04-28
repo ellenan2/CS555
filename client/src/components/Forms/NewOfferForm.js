@@ -3,9 +3,9 @@ import axios from "axios";
 import "../../App.css";
 import { useParams } from "react-router-dom";
 
-function RequestForm() {
+function NewOfferForm() {
   const [customerId, setCustomerId] = useState("");
-  const [workerId, setWorkerId] = useState("");
+  const [salesRepId, setSalesRepId] = useState("");
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [cost, setCost] = useState("");
@@ -14,9 +14,9 @@ function RequestForm() {
     event.preventDefault();
 
     try {
-      const response = await axios.post("/services", {
+      const response = await axios.post("/offers", {
         customerId: customerId,
-        workerId: workerId,
+        salesRepId: salesRepId,
         title: title,
         desc: desc,
         cost: cost,
@@ -26,7 +26,7 @@ function RequestForm() {
     }
 
     setCustomerId("");
-    setWorkerId("");
+    setSalesRepId("");
     setTitle("");
     setDesc("");
     setCost("");
@@ -35,8 +35,8 @@ function RequestForm() {
   return (
     <div className="content">
       <div className="container">
-        <div id="work-service-request-form">
-          <h2 id="form-heading">Work Service Request Form</h2>
+        <div id="new-offer-form">
+          <h2 id="form-heading">Offer Form</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="customerId">Customer ID: </label>
@@ -89,4 +89,4 @@ function RequestForm() {
   );
 }
 
-export default RequestForm;
+export default NewOfferForm;

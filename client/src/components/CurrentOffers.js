@@ -39,7 +39,7 @@ function CurrentOffers() {
         }
         console.log("Load offers useEffect");
         fetchData();
-    }, [headers]);
+    }, []);
 
     const buildCard = (offer) => {
         return (

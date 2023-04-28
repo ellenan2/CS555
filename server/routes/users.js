@@ -60,5 +60,15 @@ router.get('/logout', async (req,res) => {
     }
 });
 
+router.get('/users/:email', async (req,res) => {
+    try {
+        let email = req.params.email;
+        email = validation.checkEmail(email);
+        let user = await userData.getUserByEmail(email);
+        return res.status(200).json(user)
+    } catch (e) {
+        res.status(500).json({error: "WHAT?"});
+    }
+});
 
 module.exports = router;

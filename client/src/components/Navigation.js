@@ -31,9 +31,9 @@ const NonAuth = () => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item dropdown">
-                <NavLink 
+                <a 
                   className="nav-link dropdown-toggle" 
-                  to="#" 
+                  href="#" 
                   id="navbarDropdown" 
                   role="button" 
                   data-toggle="dropdown"
@@ -73,7 +73,7 @@ const Auth = () => {
                 <NavLink className="nav-link" to='/home'>Dashboard</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to='/profile'>Account</NavLink>
+                <NavLink className="nav-link" to='/profile'>Profile</NavLink>
               </li>
             </ul>
             <ul className="navbar-nav ml-auto">
@@ -149,6 +149,6 @@ const Auth = () => {
 //       </div>
 //     </nav>
 //   );
-};
+// };
 
 export default Navigation;

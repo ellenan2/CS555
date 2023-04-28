@@ -1,9 +1,27 @@
 const express = require('express');
 const router = express.Router();
+const userData = require('../data/users');
 const servicesData = require('../data/services');
+const validation = require('../validation');
 
 // Get all services
 router.get('/', async (req, res) => {
+  // console.log(req.session.email);
+  // console.log("I don't make it here");
+  // if (!req.session.email) return res.status(403).json("User not logged in.");
+  // try {
+  //   console.log(email);
+  //   let email = validation.checkEmail(req.session.email);
+  //   const user = await userData.getUserByEmail(email);
+  //   const listIds = user.ongoingServices;
+  //   let services = [];
+  //   for (let i = 0; i < listIds.length; ++i) {
+  //     services.push(await servicesData.getServiceById(listIds[i]));
+  //   }
+  //   res.status(200).json(services);
+  // } catch (e) {
+  //   res.status(404).json({ message: e });
+  // }
   try {
     const services = await servicesData.getServices();
     res.status(200).json(services);

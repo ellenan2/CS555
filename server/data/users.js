@@ -46,17 +46,42 @@ const exportedMethods = {
         }
         // bcrypt hashing for passwords
         const h = await bcrypt.hash(password, 10);
-        const newUser = {
-            password: h,
-            email: email,
-            phone: phone,
-            firstName: fName,
-            lastName: lName,
-            currentOffers: [],
-            ongoingServices: [],
-            pendingRequests: [],
-            userType: userType
-        };
+        let newUser = {};
+        if (userType === "0") {
+            newUser = {
+                password: h,
+                email: email,
+                phone: phone,
+                firstName: fName,
+                lastName: lName,
+                currentOffers: [],
+                ongoingServices: [],
+                pendingRequests: [],
+                userType: userType
+            };
+        } else if (userType === "1") {
+            newUser = {
+                password: h,
+                email: email,
+                phone: phone,
+                firstName: fName,
+                lastName: lName,
+                currentOffers: [],
+                currentBilling: [],
+                userType: userType
+            };
+        } else  {
+            newUser = {
+                password: h,
+                email: email,
+                phone: phone,
+                firstName: fName,
+                lastName: lName,
+                ongoingServices: [],
+                userType: userType
+            };
+        } 
+        
 
         const insertInfo = await userCollection.insertOne(newUser);
         if (insertInfo.insertedCount === 0) throw 'Failed to add user.';

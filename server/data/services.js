@@ -4,7 +4,7 @@ const { ObjectId } = require("mongodb");
 const validation = require("../validation");
 
 const exportedMethods = {
-  async getServices(userId) {
+  async getServices() {
     const serviceCollection = await services();
     const userServices = await serviceCollection.find({}).toArray();
     if (!userServices) throw "No ongoing services in database for user.";

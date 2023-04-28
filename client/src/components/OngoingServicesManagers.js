@@ -7,10 +7,11 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-function OngoingServices() {
+function OngoingServicesManagers() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [serviceData, setServiceData] = useState(undefined);
+    const [status, setStatus] = useState("");
     let list = null;
 
     const email = firebase.auth().currentUser.email;
@@ -23,30 +24,29 @@ function OngoingServices() {
         }
     };
 
-    async function fetchData() {
-        try {
-            setLoading(true);
-            const { data } = await axios.get(
-                `http://localhost:3001/services`,
-                headers
-            );
-            setServiceData(data);
-            setLoading(false);
-        } catch (e) {
-            setError(true);
-            setLoading(false);
-            console.log(e);
-        }
-    };
-
     useEffect(() => {
+        async function fetchData() {
+            try {
+                setLoading(true);
+                const { data } = await axios.get(
+                    `http://localhost:3001/services`,
+                    headers
+                );
+                setServiceData(data);
+                setLoading(false);
+            } catch (e) {
+                setError(true);
+                setLoading(false);
+                console.log(e);
+            }
+        };
         console.log("Load services useEffect");
         fetchData();
     }, []);
 
-    const buildCard = (service) => {
-        const [status, setStatus] = useState(service.status);
+    
 
+    const buildCard = (service) => {
         const handleStatusChange = async (e) => {
             try {
                 const { value } = e.target;
@@ -60,7 +60,6 @@ function OngoingServices() {
                 console.log(e);
             }
         };
-
         return (
             <Card key={service.id}>
                 <Card.Body>
@@ -115,4 +114,4 @@ function OngoingServices() {
     }
 }
 
-export default OngoingServices;
+export default OngoingServicesManagers;
